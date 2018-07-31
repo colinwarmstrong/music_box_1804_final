@@ -15,6 +15,17 @@ describe "A user sees visits '/genres'" do
       expect(page).to_not have_content('Create New Genre')
       expect(page).to_not have_content('Create Genre')
     end
+    it 'they can visit a genre show page from the genre index' do
+      genre_1 = Genre.create(name: 'Rock')
+      genre_2 = Genre.create(name: 'Funk')
+      genre_3 = Genre.create(name: 'Disco')
+
+      visit genres_path
+
+      click_on genre_1.name
+
+      expect(current_path).to eq(genre_path(genre_1))
+    end
   end
   describe "As an admin user" do
     before :each do
