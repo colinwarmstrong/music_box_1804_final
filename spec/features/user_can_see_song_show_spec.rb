@@ -24,4 +24,5 @@ describe 'user sees one song' do
 
     expect(page).to have_content("Rating: #{song_1.rating}")
   end
+  it 'they see all genres associ'
 end
