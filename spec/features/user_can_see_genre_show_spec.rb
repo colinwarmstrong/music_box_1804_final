@@ -35,7 +35,7 @@ describe "A user visits '/genres/:id'" do
 
       visit genre_path(genre_1)
 
-      expect(page).to have_content("Average Song Rating: 3")
+      expect(page).to have_content("Average Song Rating: #{genre_1.average_song_rating}")
     end
     it 'they see the name and rating of the song with the highest rating of all songs in this genre' do
       genre_1 = Genre.create(name: 'Rock')

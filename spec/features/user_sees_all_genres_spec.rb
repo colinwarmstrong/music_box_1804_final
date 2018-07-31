@@ -12,8 +12,9 @@ describe "A user sees visits '/genres'" do
       expect(page).to have_link(genre_1.name)
       expect(page).to have_link(genre_2.name)
       expect(page).to have_link(genre_3.name)
+
       expect(page).to_not have_content('Create New Genre')
-      expect(page).to_not have_content('Create Genre')
+      expect(page).to_not have_button('Create Genre')
     end
     it 'they can visit a genre show page from the genre index' do
       genre_1 = Genre.create(name: 'Rock')
@@ -39,13 +40,14 @@ describe "A user sees visits '/genres'" do
 
       visit genres_path
 
-      expect(page).to have_content(genre_1.name)
-      expect(page).to have_content(genre_2.name)
-      expect(page).to have_content(genre_3.name)
+      expect(page).to have_link(genre_1.name)
+      expect(page).to have_link(genre_2.name)
+      expect(page).to have_link(genre_3.name)
 
       within '.new-genre-form' do
         expect(page).to have_content('Create New Genre')
         expect(page).to have_content('Name')
+        expect(page).to have_button('Create Genre')
       end
     end
     it 'they can create a new genre by filling out the form' do
@@ -58,13 +60,14 @@ describe "A user sees visits '/genres'" do
       new_genre = 'Techno'
 
       fill_in :genre_name, with: new_genre
+
       click_on 'Create Genre'
 
       expect(current_path).to eq(genres_path)
-      expect(page).to have_content(new_genre)
-      expect(page).to have_content(genre_1.name)
-      expect(page).to have_content(genre_2.name)
-      expect(page).to have_content(genre_3.name)
+      expect(page).to have_link(new_genre)
+      expect(page).to have_link(genre_1.name)
+      expect(page).to have_link(genre_2.name)
+      expect(page).to have_link(genre_3.name)
     end
   end
 end

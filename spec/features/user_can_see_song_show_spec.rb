@@ -23,13 +23,15 @@ describe 'user sees one song' do
     visit song_path(song_1)
 
     expect(page).to have_content("Rating: #{song_1.rating}")
+    expect(page).to_not have_content("Rating: #{song_2.rating}")
   end
   it 'they see all genres associated with a song' do
     artist = Artist.create(name: 'Journey')
     song = artist.songs.create(title: "Don't Stop Believing", length: 320, play_count: 390808)
     genre_1 = song.genres.create(name: 'Rock')
     genre_2 = song.genres.create(name: 'Funk')
-    genre_3 = Genre.create(name: 'Punk')
+    genre_3 = song.genres.create(name: 'Jazz')
+    genre_4 = Genre.create(name: 'Punk')
 
     visit song_path(song)
 
@@ -37,7 +39,8 @@ describe 'user sees one song' do
       expect(page).to have_content('Genres for this Song:')
       expect(page).to have_content(genre_1.name)
       expect(page).to have_content(genre_2.name)
-      expect(page).to_not have_content(genre_3.name)
+      expect(page).to have_content(genre_3.name)
+      expect(page).to_not have_content(genre_4.name)
     end
   end
   it 'they see up to three other songs that have the same rating' do
