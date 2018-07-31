@@ -2,6 +2,13 @@
 <h3><%= @song.length%></h3>
 <h3>Rating: <%= @song.rating %></h3>
 
+<section class='songs-with-same-rating'>
+  <h3>Songs With Same Rating:</h3>
+  <% @song.songs_with_same_rating.each do |song| %>
+    <%= link_to song.title, song_path(song) %>
+  <% end %>
+</section>
+
 <section class='song-genres'>
   <h3>Genres for this Song:</h3>
   <% @song.genres.each do |genre| %>
