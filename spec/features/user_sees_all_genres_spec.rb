@@ -2,17 +2,18 @@ require 'rails_helper'
 
 describe "A user sees visits '/genres'" do
   describe "As a visitor" do
-    it 'they see all genres in the database' do
+    it 'they see all genres in the database as links to a genre show page' do
       genre_1 = Genre.create(name: 'Rock')
       genre_2 = Genre.create(name: 'Funk')
       genre_3 = Genre.create(name: 'Disco')
 
       visit genres_path
 
-      expect(page).to have_content(genre_1.name)
-      expect(page).to have_content(genre_2.name)
-      expect(page).to have_content(genre_3.name)
+      expect(page).to have_link(genre_1.name)
+      expect(page).to have_link(genre_2.name)
+      expect(page).to have_link(genre_3.name)
       expect(page).to_not have_content('Create New Genre')
+      expect(page).to_not have_content('Create Genre')
     end
   end
   describe "As an admin user" do
