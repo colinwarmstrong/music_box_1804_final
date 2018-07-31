@@ -1,6 +1,13 @@
 <h1><%= @genre.name %></h1>
 <h3>Average Song Rating: <%= @genre.average_song_rating %></h3>
 
+<% unless @genre.songs.empty? %>
+  <div class="highest-rated-song">
+    <h3>Highest Rated Song: <%= @genre.highest_rated_song.title %></h3>
+    <h3>Rating: <%= @genre.highest_rated_song.rating %></h3>
+  </div>
+<% end %>
+
 <% @genre.songs.each do |song| %>
   <h3><%= song.title %></h3>
   <p>Length: <%= song.length %></p>
