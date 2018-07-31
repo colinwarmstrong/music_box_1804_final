@@ -51,7 +51,23 @@ describe "A user visits '/genres/:id'" do
       within('.highest-rated-song') do
         expect(page).to have_content("Highest Rated Song: #{song_3.title}")
         expect(page).to have_content("Rating: #{song_3.rating}")
-      end  
+      end
+    end
+    it 'they see the name and rating of the song with the lowest rating of all songs in this genre' do
+      genre_1 = Genre.create(name: 'Rock')
+      genre_2 = Genre.create(name: 'Funk')
+      artist = Artist.create(name: 'Foo Fighters')
+      song_1 = genre_1.songs.create(title: 'Everlong', length: 240, play_count: 6600, artist_id: artist.id, rating: 2)
+      song_2 = genre_1.songs.create(title: 'Hero', length: 330, play_count: 7900, artist_id: artist.id, rating: 3)
+      song_3 = genre_1.songs.create(title: 'Hero', length: 330, play_count: 7900, artist_id: artist.id, rating: 4)
+      song_4 = genre_2.songs.create(title: 'Pretenders', length: 360, play_count: 8100, artist_id: artist.id, rating: 1)
+
+      visit genre_path(genre_1)
+
+      within('.lowest-rated-song') do
+        expect(page).to have_content("Lowest Rated Song: #{song_1.title}")
+        expect(page).to have_content("Rating: #{song_1.rating}")
+      end
     end
   end
 end
