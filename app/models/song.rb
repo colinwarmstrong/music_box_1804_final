@@ -16,4 +16,8 @@ class Song < ApplicationRecord
   def generate_slug
     self.slug = title.parameterize
   end
+
+  def songs_with_same_rating
+    Song.where(rating: rating).where.not(id: id).limit(3)
+  end
 end
