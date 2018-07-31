@@ -5,7 +5,7 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song = Song.find_by(slug: params[:slug])
+    @song = Song.includes(:genres).find_by(slug: params[:slug])
   end
 
   def new
