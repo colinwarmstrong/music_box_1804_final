@@ -3,10 +3,12 @@
   <%= genre.name %>
 <% end %>
 
-<% if current_admin? %>
-  <h3>Create New Genre</h3>
-  <%= form_for @genre do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<section class='new-genre-form'>
+  <% if current_admin? %>
+    <h3>Create New Genre</h3>
+    <%= form_for @genre do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <% end %>
   <% end %>
-<% end %>
+</section>

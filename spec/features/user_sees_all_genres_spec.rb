@@ -29,7 +29,11 @@ describe "A user sees visits '/genres'" do
       expect(page).to have_content(genre_1.name)
       expect(page).to have_content(genre_2.name)
       expect(page).to have_content(genre_3.name)
-      expect(page).to have_content('Create New Genre')
+
+      within '.new-genre-form' do
+        expect(page).to have_content('Create New Genre')
+        expect(page).to have_content('Name')
+      end
     end
     it 'they can create a new genre by filling out the form' do
     end
