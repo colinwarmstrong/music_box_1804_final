@@ -8,6 +8,13 @@
   </div>
 <% end %>
 
+<% unless @genre.songs.empty? %>
+  <div class="lowest-rated-song">
+    <h3>Lowest Rated Song: <%= @genre.lowest_rated_song.title %></h3>
+    <h3>Rating: <%= @genre.lowest_rated_song.rating %></h3>
+  </div>
+<% end %>
+
 <% @genre.songs.each do |song| %>
   <h3><%= song.title %></h3>
   <p>Length: <%= song.length %></p>
