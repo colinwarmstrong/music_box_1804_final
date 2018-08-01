@@ -9,15 +9,4 @@ class GenresController < ApplicationController
   def show
     @genre = Genre.includes(:songs).find(params[:id])
   end
-
-  def create
-    Genre.create(genre_params)
-    redirect_to genres_path
-  end
-
-  private
-
-  def genre_params
-    params.require(:genre).permit(:name)
-  end
 end
